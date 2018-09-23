@@ -4,24 +4,23 @@ services:
   app:
     build: .
     ports:
-      - "4000:4000"
-    command: mix phx.server
+      - "3000:3000"
+    command: rails s
     environment:
-      - MIX_ENV=dev
-      - PORT=4000
+      - RAILS_ENV=development
     volumes:
       - ./app:/app:cached
     depends_on:
       - mysql
 
   mysql:
-    image: mysql:8.0.3
+    image: mysql:5.7
     ports:
       - "3306:3306"
     volumes:
       - ./data/mysql/volumes:/var/lib/mysql:cached
     environment:
       - MYSQL_ROOT_USERNAME=root
-      - MYSQL_DATABASE=phx_app_dev
+      - MYSQL_DATABASE=rails_app_development
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_PORT=3306
